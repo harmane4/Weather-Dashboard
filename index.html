@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css"/>
-    <script src="script.js" defer></script>  
-    <title>Document</title>
-</head>
-<body>
-    <h2>Hello</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Weather Dashboard</title>
+  </head>
+  <body>
+    <header><h1>Weather Dashboard</h1></header>
+    <main>
+        <!---Current City--->
+        <div class="currentDayContainer">
+            <h2 id="currentDay" class="currentDate"></h2>
+            <h2 class="cityName"></h2>
+            <h3 class="temperature">Temp:</h3>
+            <h3 class="windSpeed">Wind:</h3>
+            <h3 class=humidityValue>Humidity:</h3>
+            <h3 class="UV">UV Index:</h3>
 
+        </div>
+
+        <!---5 Day forecast--->
+      <div>
+        <h2>5-Day Forecast</h2>
+        <div id="week-forecast">
+          <div id="day1" class="date">Date</div>
+          <div id="day2" class="date">Date</div>
+          <div id="day3" class="date">Date</div>
+          <div id="day4" class="date">Date</div>
+          <div id="day5" class="date">Date</div>
+        </div>
+      </div>
+    </main>
+        <!---Search button & City to click on --->
+    <aside class="input">
+      <label for="city-search">Search the site:</label>
+      <input type="text" class="inputValue"/>
+      <input type="submit" value="submit" class="button"/>
+    </aside>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>
