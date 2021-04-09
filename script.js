@@ -1,3 +1,15 @@
+//DATES FOR 5 DAY FORECAST 
+$("#currentDay").text(moment().format("dddd, MMM Do YYYY"));
+
+$("#day1").text(moment().add(1, 'days').format("dddd, MMM Do"));
+
+$("#day2").text(moment().add(2, 'days').format("dddd, MMM Do"));
+
+$("#day3").text(moment().add(3, 'days').format("dddd, MMM Do"));
+
+$("#day4").text(moment().add(4, 'days').format("dddd, MMM Do"));
+
+$("#day5").text(moment().add(5, 'days').format("dddd, MMM Do"));
 
 var button = document.querySelector('.button')
 var inputValue = document.querySelector('.inputValue')
@@ -6,11 +18,10 @@ var temperature = document.querySelector('.temperature')
 var humidityValue = document.querySelector('.humidityValue')
 var windSpeed = document.querySelector('.windSpeed')
 
-button.addEventListener('click', getCurrentForecastApi)
-
+button.addEventListener('click', getCurrentDayForecastApi)
 
 //Function to get API for the current forecast 
-function getCurrentForecastApi(){
+function getCurrentDayForecastApi(){
     var requestUrlForCurrentDayForecastApi = 'https://api.openweathermap.org/data/2.5/weather?q='+inputValue.value+'&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric'
     console.log(requestUrlForCurrentDayForecastApi)
 
@@ -34,6 +45,25 @@ function getCurrentForecastApi(){
 
     })
 }
+
+button.addEventListener('click', getFiveDayForecastApi)
+//Function to get API for the 5 day forecast 
+function getFiveDayForecastApi(){
+    var requestUrlForFiveDayForecastApi = 'https://api.openweathermap.org/data/2.5/forecast?q='+inputValue.value+'&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric'
+    console.log(requestUrlForFiveDayForecastApi)
+
+    fetch(requestUrlForFiveDayForecastApi)
+    .then(function (response){
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        
+    })
+}
+
+
+
 // */
 
 // var repoList = document.querySelector('ul');
@@ -43,26 +73,7 @@ function getCurrentForecastApi(){
 // var city = "London";
 
 
-// var myKey = 'bee9bea7f570ee0519f49aaa8cf31eff'
 
-// //DATES FOR 5 DAY FORECAST 
-// $("#currentDay").text(moment().format("dddd, MMM Do YYYY"));
-// console.log(moment().format("dddd, MMM Do YYYY"));
-
-// $("#day1").text(moment().add(1, 'days').format("dddd, MMM Do"));
-// console.log(moment().add(1, 'days').format("dddd, MMM Do"));
-
-// $("#day2").text(moment().add(2, 'days').format("dddd, MMM Do"));
-// console.log(moment().add(2, 'days').format("dddd, MMM Do"));
-
-// $("#day3").text(moment().add(3, 'days').format("dddd, MMM Do"));
-// console.log(moment().add(3, 'days').format("dddd, MMM Do"));
-
-// $("#day4").text(moment().add(4, 'days').format("dddd, MMM Do"));
-// console.log(moment().add(4, 'days').format("dddd, MMM Do"));
-
-// $("#day5").text(moment().add(5, 'days').format("dddd, MMM Do"));
-// console.log(moment().add(5, 'days').format("dddd, MMM Do"));
 
 // //Function to get API for the current forecast 
 // function getCurrentForecastApi(){
