@@ -1,16 +1,12 @@
 //DATES FOR 5 DAY FORECAST 
 $("#currentDay").text(moment().format("dddd, MMM Do YYYY"));
-
 $("#day1").text(moment().add(1, 'days').format("dddd, MMM Do"));
-
 $("#day2").text(moment().add(2, 'days').format("dddd, MMM Do"));
-
 $("#day3").text(moment().add(3, 'days').format("dddd, MMM Do"));
-
 $("#day4").text(moment().add(4, 'days').format("dddd, MMM Do"));
-
 $("#day5").text(moment().add(5, 'days').format("dddd, MMM Do"));
 
+//VARIABLES FOR CURRENT DAY FORECAST
 var button = document.querySelector('.button')
 var inputValue = document.querySelector('.inputValue')
 var cityName = document.querySelector('.cityName')
@@ -38,16 +34,18 @@ function getCurrentDayForecastApi(){
         var windValue = data['wind']['speed'];
 
         cityName.innerHTML = nameValue;
-        temperature.innerHTML = tempValue;
-        humidityValue.innerHTML = humidValue;
-        windSpeed.innerHTML = windValue;
+        temperature.innerHTML = tempValue +' ˚C ';
+        humidityValue.innerHTML = humidValue +'˚%';
+        windSpeed.innerHTML = windValue + ' MPH ';
 
 
     })
 }
 
-button.addEventListener('click', getFiveDayForecastApi)
 //Function to get API for the 5 day forecast 
+
+button.addEventListener('click', getFiveDayForecastApi)
+
 function getFiveDayForecastApi(){
     var requestUrlForFiveDayForecastApi = 'https://api.openweathermap.org/data/2.5/forecast?q='+inputValue.value+'&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric'
     console.log(requestUrlForFiveDayForecastApi)
@@ -60,7 +58,18 @@ function getFiveDayForecastApi(){
         console.log(data);
         
     })
+
+    for (let i = 1; i <= 6; i++) {
+        console.log(i)
+        var fiveDayTemp = document.createElement('p')
+        var fiveDayHumidity = document.createElement('p')
+        var fiveDayWindSpeed = document.createElement('p')
+        fiveDayTemp.textContent = `Temperature: ${data.list[i].main.temp}ºc`
+        fiveDayHumidity.textContent = `Humidity: ${data.list[i].main.humidity}ºc`
+        fiveDayWindSpeed.textContent = `Wind Speed: ${data.list[i].wind.spped}MPH`
+    }
 }
+
 
 
 
