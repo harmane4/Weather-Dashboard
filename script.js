@@ -5,14 +5,14 @@ var cityName = document.querySelector('.cityName')
 var temperature = document.querySelector('.temperature')
 var humidityValue = document.querySelector('.humidityValue')
 var windSpeed = document.querySelector('.windSpeed')
-var UvIndex = document.getElementById("UV-index")
+var uvIndex = document.getElementById("UV-index")
 var fiveDayForecast = document.getElementById("weekForecast")
 var currentWeatherIcon = document.getElementById("weatherIcon")
 
-button.addEventListener('click', getCurrentDayForecastApi)
+button.addEventListener('click', getWeatherForecasts)
 
 //Function to get API for the current forecast 
-function getCurrentDayForecastApi(){
+function getWeatherForecasts(){
     var requestUrlForCurrentDayForecastApi = 'https://api.openweathermap.org/data/2.5/weather?q='+inputValue.value+'&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric'
     console.log(requestUrlForCurrentDayForecastApi)
 
@@ -35,7 +35,7 @@ function getCurrentDayForecastApi(){
         windSpeed.innerHTML = windValue + ' MPH ';
         //currentWeatherIcon.setAttribute(("src","https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"));
         
-        // //UV REQUEST
+        // //REQUEST FOR 5 EXTENDED DAY FORECAST
        var longitude = data.coord.lon;
        console.log(data.coord.lon)
        var latitude = data.coord.lat;
@@ -54,9 +54,7 @@ function getCurrentDayForecastApi(){
             console.log(forecastData.daily[2])
             console.log(forecastData.daily[3])
             console.log(forecastData.daily[4])
-
-    
-       
+            console.log(forecastData.current.uvi)
     
             for (let i = 1; i <= 6; i++) {
                 console.log(i)
@@ -64,65 +62,16 @@ function getCurrentDayForecastApi(){
                 var fiveDayTemp = document.createElement('p')
                 var fiveDayHumidity = document.createElement('p')
                 var fiveDayWindSpeed = document.createElement('p')
+                var uvValue = forecastData.current.uvi
                 fiveDayTemp.textContent = forecastData.daily[i].temp.day +' ˚C ';
                 fiveDayHumidity.textContent = forecastData.daily[i].humidity +'˚%';
                 fiveDayWindSpeed.textContent = forecastData.daily[i].wind_speed + ' MPH ';
                 fiveDayForecast.append(fiveDayTemp, fiveDayHumidity, fiveDayWindSpeed)
+
+                uvIndex.innerHTML = uvValue
     }
 })
 })
-
-//One Call Function API 
-
-
-
-//Function to get API for the 5 day forecast 
-
-// button.addEventListener('click', getFiveDayForecastApi)
-
-// function getFiveDayForecastApi(){
-//     var requestUrlForFiveDayForecastApi = 'https://api.openweathermap.org/data/2.5/forecast?q='+inputValue.value+'&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric'
-//     console.log(requestUrlForFiveDayForecastApi)
-
-//     fetch(requestUrlForFiveDayForecastApi)
-//     .then(function (response){
-//         return response.json();
-//     })
-//     .then(function (fiveDayData) {
-//         console.log(fiveDayData);
-//         console.log(fiveDayData.list[0]);
-//         console.log(fiveDayData.list[1]);
-//         console.log(fiveDayData.list[2]);
-//         console.log(fiveDayData.list[3]);
-//         console.log(fiveDayData.list[4]);
-
-   
-
-//         for (let i = 0; i <= 5; i++) {
-//             console.log(i)
-            
-//             var fiveDayTemp = document.createElement('p')
-//             var fiveDayHumidity = document.createElement('p')
-//             var fiveDayWindSpeed = document.createElement('p')
-//             fiveDayTemp.textContent = fiveDayData.list[i].main.temp +' ˚C ';
-//             fiveDayHumidity.textContent = fiveDayData.list[i].main.humidity +'˚%';
-//             fiveDayWindSpeed.textContent = fiveDayData.list[i].wind.speed + ' MPH ';
-//             fiveDayForecast.append(fiveDayTemp, fiveDayHumidity, fiveDayWindSpeed)
-//         }
-        
-        
-//     })
-
-    // for (let i = 1; i <= 6; i++) {
-    //     console.log(i)
-    //     var fiveDayTemp = document.createElement('p')
-    //     var fiveDayHumidity = document.createElement('p')
-    //     var fiveDayWindSpeed = document.createElement('p')
-    //     fiveDayTemp.textContent = 
-    //     fiveDayHumidity.textContent = 
-    //     fiveDayWindSpeed.textContent = `Wind Speed: ${data.list[i].wind.speed}MPH`
-
-// }
 
 
 // //SET CITY TO LOCAL STORAGE 
