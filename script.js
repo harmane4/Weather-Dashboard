@@ -69,6 +69,8 @@ function getWeatherForecasts() {
 
           for (let i = 1; i <= 6; i++) {
             console.log(i);
+            let day = document.getElementById(`day${i}`)
+            day.textContent = `${moment().add(i, 'days').format('DD/MM/YY')}`
 
             var fiveDayTemp = document.createElement("p");
             var fiveDayHumidity = document.createElement("p");
@@ -78,15 +80,15 @@ function getWeatherForecasts() {
             fiveDayHumidity.textContent = forecastData.daily[i].humidity + "˚%";
             fiveDayWindSpeed.textContent =
               forecastData.daily[i].wind_speed + " MPH ";
-            fiveDayForecast.append(
+            day.append(
               fiveDayTemp,
               fiveDayHumidity,
               fiveDayWindSpeed
             );
 
             uvIndex.innerHTML = uvValue;
-            console.log(uvValue)
-
+           
+                //BACKGROUND COLOUR OF UV INDEX WILL CHANGE DEPENDING ON CONDITIONS 
             if (uvValue < 2) {
                 document.getElementById("UV-index").style.backgroundColor = "green";
             }
