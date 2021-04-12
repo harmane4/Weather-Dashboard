@@ -1,4 +1,5 @@
 //SELECTORS
+
 var button = document.querySelector(".button");
 var inputValue = document.querySelector(".inputValue");
 var cityName = document.querySelector(".cityName");
@@ -8,68 +9,68 @@ var windSpeed = document.querySelector(".windSpeed");
 var uvIndex = document.getElementById("UV-index");
 var fiveDayForecast = document.getElementById("weekForecast");
 var currentWeatherIcon = document.getElementById("weatherIcon");
-var cityNameList = document.querySelector(".city-list")
+var cityNameList = document.querySelector(".city-list");
 
+//EVENT LISTENERS
 
-button.addEventListener('click', addSearchResult); 
-document.addEventListener('DOMContentLoaded', getSearchResult)
+button.addEventListener("click", addSearchResult);
+document.addEventListener("DOMContentLoaded", getSearchResultFromLocalStorage); //If everything loads, run function
 
+//LOCAL STORAGE FUNCTIONS
 
 function addSearchResult(event) {
-    event.preventDefault();
-    var searchResultDiv = document.createElement("div"); 
-    searchResultDiv.classList.add("cityName");
+  event.preventDefault();
+  var searchResultDiv = document.createElement("div");
+  searchResultDiv.classList.add("cityName");
 
-    var newSearchResult = document.createElement('li'); 
-    newSearchResult.innerText = inputValue.value; 
-    newSearchResult.classList.add('cityName-item');
-    searchResultDiv.appendChild(newSearchResult);
-    //add cityName to local storage 
-    saveSearchResult(inputValue.value);
-
-
-    cityNameList.appendChild(searchResultDiv);
+  var newSearchResult = document.createElement("li");
+  newSearchResult.innerText = inputValue.value;
+  newSearchResult.classList.add("cityName-item");
+  searchResultDiv.appendChild(newSearchResult);
+  //Add to local storage
+  saveSearchResultToLocalStorage(inputValue.value);
+  //Append to list
+  cityNameList.appendChild(searchResultDiv);
 }
 
-function saveSearchResult(searchResult) {
-    let citySearchResult; 
-    if (localStorage.getItem("cityNames")=== null) {
-        citySearchResult = [];
-    } else {
-        citySearchResult = JSON.parse(localStorage.getItem("cityNames"));
-    }
-    citySearchResult.push(searchResult); 
-    localStorage.setItem("cityNames", JSON.stringify(citySearchResult)); 
+function saveSearchResultToLocalStorage(searchResult) {
+  //Check if local storage already has items in it
+  let citySearchResult;
+  if (localStorage.getItem("search") === null) {
+    //if there is nothing in local storage
+    citySearchResult = []; //create empty array
+  } else {
+    citySearchResult = JSON.parse(localStorage.getItem("search")); //already have items in local storage, parse it back into an array
+  }
+  citySearchResult.push(searchResult); //
+  localStorage.setItem("search", JSON.stringify(citySearchResult)); //push array to local storage
 }
 
-function getSearchResult() {
-    let citySearchResult; 
-    if (localStorage.getItem("cityNames")=== null) {
-        citySearchResult = [];
-    } else {
-        citySearchResult = JSON.parse(localStorage.getItem('cityNames'));
-    }
-citySearchResult.forEach(function(citySearch) {
+function getSearchResultFromLocalStorage() {
+  let citySearchResult;
+  if (localStorage.getItem("search") === null) {
+    //if there is nothing in local storage
+    citySearchResult = []; //create empty array
+  } else {
+    citySearchResult = JSON.parse(localStorage.getItem("search"));
+  }
 
-    var citySearchDiv = document.createElement("div"); 
+  citySearchResult.forEach(function (citySearch) {
+    var citySearchDiv = document.createElement("div");
     citySearchDiv.classList.add("cityName");
 
-    var newCitySearch = document.createElement('li'); 
-    newCitySearch.innerText = citySearch; 
-    newCitySearch.classList.add('cityName-item');
+    var newCitySearch = document.createElement("li");
+    newCitySearch.innerText = citySearch;
+    newCitySearch.classList.add("cityName-item");
     citySearchDiv.appendChild(newCitySearch);
-  
-
-
     cityNameList.appendChild(citySearchDiv);
-});
-} 
-
-
+  });
+}
 
 button.addEventListener("click", getWeatherForecasts);
 
-//Current  day forecast
+//CURRENT DAY FORECAST
+
 function getWeatherForecasts() {
   var requestUrlForCurrentDayForecastApi =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -88,15 +89,19 @@ function getWeatherForecasts() {
       var humidValue = data.main.humidity;
       var windValue = data.wind.speed;
       var iconCode = data.weather[0].icon;
-      const img = document.querySelector('#weatherIcon');
-      img.setAttribute('src', `http://openweathermap.org/img/wn/${iconCode}@2x.png`)
+      const img = document.querySelector("#weatherIcon");
+      img.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${iconCode}@2x.png`
+      );
 
       cityName.innerHTML = nameValue;
       temperature.innerHTML = tempValue + " ˚C ";
       humidityValue.innerHTML = humidValue + "%";
       windSpeed.innerHTML = windValue + " MPH ";
 
-      // //REQUEST FOR 5 EXTENDED DAY FORECAST
+      //5 EXTENDED DAY FORECAST
+
       var longitude = data.coord.lon;
       var latitude = data.coord.lat;
 
@@ -113,22 +118,24 @@ function getWeatherForecasts() {
           return resp.json();
         })
         .then(function (forecastData) {
-  
           for (let i = 1; i <= 6; i++) {
-            let day = document.getElementById(`day${i}`)
+            let day = document.getElementById(`day${i}`);
 
             var fiveDayTemp = document.createElement("p");
             var fiveDayHumidity = document.createElement("p");
             var fiveDayWindSpeed = document.createElement("p");
-            var fiveDayWeatherIcon = document.createElement("img")
-            var iconImage = forecastData.daily[i].weather[0].icon
+            var fiveDayWeatherIcon = document.createElement("img");
+            var iconImage = forecastData.daily[i].weather[0].icon;
             var uvValue = forecastData.current.uvi;
             fiveDayTemp.textContent = forecastData.daily[i].temp.day + " ˚C ";
             fiveDayHumidity.textContent = forecastData.daily[i].humidity + "˚%";
-            fiveDayWeatherIcon.setAttribute('src', `http://openweathermap.org/img/wn/${iconImage}@2x.png`)
+            fiveDayWeatherIcon.setAttribute(
+              "src",
+              `http://openweathermap.org/img/wn/${iconImage}@2x.png`
+            );
             fiveDayWindSpeed.textContent =
               forecastData.daily[i].wind_speed + " MPH ";
-              day.append(
+            day.append(
               fiveDayTemp,
               fiveDayHumidity,
               fiveDayWindSpeed,
@@ -136,27 +143,22 @@ function getWeatherForecasts() {
             );
 
             uvIndex.innerHTML = uvValue;
-           
-                //BACKGROUND COLOUR OF UV INDEX WILL CHANGE DEPENDING ON CONDITIONS 
+
+            //BACKGROUND COLOUR OF UV INDEX WILL CHANGE DEPENDING ON CONDITIONS
             if (uvValue < 3) {
-                document.getElementById("UV-index").style.backgroundColor = "green";
+              document.getElementById("UV-index").style.backgroundColor =
+                "green";
             }
             if (uvValue >= 3 && uvValue < 8) {
-                document.getElementById("UV-index").style.backgroundColor = "orange"; 
+              document.getElementById("UV-index").style.backgroundColor =
+                "orange";
             }
             if (uvValue >= 7) {
-                document.getElementById("UV-index").style.backgroundColor = "red";
+              document.getElementById("UV-index").style.backgroundColor = "red";
             }
-            
-    
           }
         });
     });
-
-   
-
-
-    
 
   //DATES FOR 5 DAY FORECAST
   $("#currentDay").text(moment().format("dddd, MMM Do YYYY"));
@@ -170,6 +172,4 @@ function getWeatherForecasts() {
   $("#day4").text(moment().add(4, "days").format("dddd, MMM Do"));
 
   $("#day5").text(moment().add(5, "days").format("dddd, MMM Do"));
-
- 
 }
