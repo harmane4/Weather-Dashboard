@@ -7,7 +7,7 @@ var humidityValue = document.querySelector(".humidityValue");
 var windSpeed = document.querySelector(".windSpeed");
 var uvIndex = document.getElementById("UV-index");
 var fiveDayForecast = document.getElementById("weekForecast");
-//var currentWeatherIcon = document.getElementById("weatherIcon");
+var currentWeatherIcon = document.getElementById("weatherIcon");
 
 button.addEventListener("click", getWeatherForecasts);
 
@@ -27,25 +27,24 @@ function getWeatherForecasts() {
       console.log(data);
       var nameValue = data.name;
       var tempValue = data.main.temp;
-      console.log(data.main.temp);
       var humidValue = data.main.humidity;
       var windValue = data.wind.speed;
-      //var weatherIcon = data.weather.icon;
+      var iconCode = data.weather[0].icon;
+      const img = document.querySelector('#weatherIcon');
+      img.setAttribute('src', `http://openweathermap.org/img/wn/${iconCode}@2x.png`)
+
 
       cityName.innerHTML = nameValue;
       temperature.innerHTML = tempValue + " ˚C ";
       humidityValue.innerHTML = humidValue + "˚%";
       windSpeed.innerHTML = windValue + " MPH ";
-      //currentWeatherIcon.setAttribute(("src","https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"));
 
 
       //Save nameValue to a list 
 
       // //REQUEST FOR 5 EXTENDED DAY FORECAST
       var longitude = data.coord.lon;
-      console.log(data.coord.lon);
       var latitude = data.coord.lat;
-      console.log(data.coord.lat);
 
       var requestForExtendedForecastData =
         "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -60,17 +59,9 @@ function getWeatherForecasts() {
           return resp.json();
         })
         .then(function (forecastData) {
-          console.log(forecastData.daily[0]);
-          console.log(forecastData.daily[1]);
-          console.log(forecastData.daily[2]);
-          console.log(forecastData.daily[3]);
-          console.log(forecastData.daily[4]);
-          console.log(forecastData.current.uvi);
-
+  
           for (let i = 1; i <= 6; i++) {
-            console.log(i);
             let day = document.getElementById(`day${i}`)
-            day.textContent = `${moment().add(i, 'days').format('DD/MM/YY')}`
 
             var fiveDayTemp = document.createElement("p");
             var fiveDayHumidity = document.createElement("p");
@@ -80,7 +71,7 @@ function getWeatherForecasts() {
             fiveDayHumidity.textContent = forecastData.daily[i].humidity + "˚%";
             fiveDayWindSpeed.textContent =
               forecastData.daily[i].wind_speed + " MPH ";
-            day.append(
+              day.append(
               fiveDayTemp,
               fiveDayHumidity,
               fiveDayWindSpeed
