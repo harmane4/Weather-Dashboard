@@ -12,32 +12,40 @@
         <!---Current City--->
         <div class="currentDayContainer">
             <h2 id="currentDay" class="currentDate"></h2>
-            <h2 class="cityName">
-            </h2>
-            <h3 class="temperature">Temp:</h3>
-            <h3 class="windSpeed">Wind:</h3>
-            <h3 class=humidityValue>Humidity:</h3>
-            <h3 class="UV" id="UV-index">UV Index:</h3>
+            <h2 class="cityName"></h2>
+            <span>Temp:</span><h3 class="temperature"></h3>
+            <span>Wind Speed:</span><h3 class="windSpeed"></h3>
+            <span>Humidity:</span><h3 class=humidityValue></h3></h3>
+            <span>UV Index:</span> <h3 class="UV" id="UV-index"></h3>
+            <span><img id="weatherIcon" src="" alt=""></span>
         </div>
 
         <!---5 Day forecast--->
       <div>
         <h2>5-Day Forecast:</h2>
         <div id="weekForecast">
-          <div id="day1" class="date">Date</div>
-          <div id="day2" class="date">Date</div>
-          <div id="day3" class="date">Date</div>
-          <div id="day4" class="date">Date</div>
-          <div id="day5" class="date">Date</div>
+          <div id="day1" class="date"></div>
+          <div id="day2" class="date"></div>
+          <div id="day3" class="date"></div>
+          <div id="day4" class="date"></div>
+          <div id="day5" class="date"></div>
         </div>
       </div>
     </main>
         <!---Search button & City to click on --->
-    <aside class="input" id="input">
+    <div class="input" id="input">
       <label for="city-search">Search for a city:</label>
-      <input type="text" class="inputValue"/>
-      <input type="submit" value="search" class="button"/>
-    </aside>
+      <input type="text" class="inputValue"><!---todo-input --->
+      <input type="submit" value="search" class="button"  id="searchButton"><!---todo-button --->
+    
+      <h2>Search History</h2>
+      <div class="citySearch-container" id="searchHistory">
+      <ul class="city-list"></ul>
+    </div>
+
+    <div>
+      
+    </div>
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
