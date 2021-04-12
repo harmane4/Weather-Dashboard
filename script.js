@@ -11,7 +11,7 @@ var currentWeatherIcon = document.getElementById("weatherIcon");
 
 button.addEventListener("click", getWeatherForecasts);
 
-//Function to get API for the current forecast
+//Current  day forecast
 function getWeatherForecasts() {
   var requestUrlForCurrentDayForecastApi =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -33,14 +33,10 @@ function getWeatherForecasts() {
       const img = document.querySelector('#weatherIcon');
       img.setAttribute('src', `http://openweathermap.org/img/wn/${iconCode}@2x.png`)
 
-
       cityName.innerHTML = nameValue;
       temperature.innerHTML = tempValue + " ˚C ";
       humidityValue.innerHTML = humidValue + "˚%";
       windSpeed.innerHTML = windValue + " MPH ";
-
-
-      //Save nameValue to a list 
 
       // //REQUEST FOR 5 EXTENDED DAY FORECAST
       var longitude = data.coord.lon;
@@ -66,15 +62,19 @@ function getWeatherForecasts() {
             var fiveDayTemp = document.createElement("p");
             var fiveDayHumidity = document.createElement("p");
             var fiveDayWindSpeed = document.createElement("p");
+            var fiveDayWeatherIcon = document.createElement("img")
+            var iconImage = forecastData.daily[i].weather[0].icon
             var uvValue = forecastData.current.uvi;
             fiveDayTemp.textContent = forecastData.daily[i].temp.day + " ˚C ";
             fiveDayHumidity.textContent = forecastData.daily[i].humidity + "˚%";
+            fiveDayWeatherIcon.setAttribute('src', `http://openweathermap.org/img/wn/${iconImage}@2x.png`)
             fiveDayWindSpeed.textContent =
               forecastData.daily[i].wind_speed + " MPH ";
               day.append(
               fiveDayTemp,
               fiveDayHumidity,
-              fiveDayWindSpeed
+              fiveDayWindSpeed,
+              fiveDayWeatherIcon
             );
 
             uvIndex.innerHTML = uvValue;
@@ -114,6 +114,5 @@ function getWeatherForecasts() {
 
   $("#day5").text(moment().add(5, "days").format("dddd, MMM Do"));
 
-  // //SET CITY TO LOCAL STORAGE
-  //localStorage.setItem(inputValue, value);
+ 
 }
