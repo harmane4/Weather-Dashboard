@@ -1,4 +1,4 @@
-//VARIABLES FOR CURRENT DAY FORECAST
+//SELECTORS
 var button = document.querySelector(".button");
 var inputValue = document.querySelector(".inputValue");
 var cityName = document.querySelector(".cityName");
@@ -8,6 +8,64 @@ var windSpeed = document.querySelector(".windSpeed");
 var uvIndex = document.getElementById("UV-index");
 var fiveDayForecast = document.getElementById("weekForecast");
 var currentWeatherIcon = document.getElementById("weatherIcon");
+var cityNameList = document.querySelector(".city-list")
+
+
+button.addEventListener('click', addSearchResult); 
+document.addEventListener('DOMContentLoaded', getSearchResult)
+
+
+function addSearchResult(event) {
+    event.preventDefault();
+    var searchResultDiv = document.createElement("div"); 
+    searchResultDiv.classList.add("cityName");
+
+    var newSearchResult = document.createElement('li'); 
+    newSearchResult.innerText = inputValue.value; 
+    newSearchResult.classList.add('cityName-item');
+    searchResultDiv.appendChild(newSearchResult);
+    //add cityName to local storage 
+    saveSearchResult(inputValue.value);
+
+
+    cityNameList.appendChild(searchResultDiv);
+}
+
+function saveSearchResult(searchResult) {
+    let citySearchResult; 
+    if (localStorage.getItem("cityNames")=== null) {
+        citySearchResult = [];
+    } else {
+        citySearchResult = JSON.parse(localStorage.getItem("cityNames"));
+    }
+    citySearchResult.push(searchResult); 
+    localStorage.setItem("cityNames", JSON.stringify(citySearchResult)); 
+}
+
+function getSearchResult() {
+    let citySearchResult; 
+    if (localStorage.getItem("cityNames")=== null) {
+        citySearchResult = [];
+    } else {
+        citySearchResult = JSON.parse(localStorage.getItem('cityNames'));
+    }
+citySearchResult.forEach(function(citySearch) {
+
+    var citySearchDiv = document.createElement("div"); 
+    citySearchDiv.classList.add("cityName");
+
+    var newCitySearch = document.createElement('li'); 
+    newCitySearch.innerText = citySearch; 
+    newCitySearch.classList.add('cityName-item');
+    citySearchDiv.appendChild(newCitySearch);
+  
+
+
+    cityNameList.appendChild(citySearchDiv);
+});
+} 
+
+
 
 button.addEventListener("click", getWeatherForecasts);
 
@@ -35,7 +93,7 @@ function getWeatherForecasts() {
 
       cityName.innerHTML = nameValue;
       temperature.innerHTML = tempValue + " ˚C ";
-      humidityValue.innerHTML = humidValue + "˚%";
+      humidityValue.innerHTML = humidValue + "%";
       windSpeed.innerHTML = windValue + " MPH ";
 
       // //REQUEST FOR 5 EXTENDED DAY FORECAST
@@ -80,13 +138,13 @@ function getWeatherForecasts() {
             uvIndex.innerHTML = uvValue;
            
                 //BACKGROUND COLOUR OF UV INDEX WILL CHANGE DEPENDING ON CONDITIONS 
-            if (uvValue < 2) {
+            if (uvValue < 3) {
                 document.getElementById("UV-index").style.backgroundColor = "green";
             }
-            if (uvValue > 2 && uvValue < 8) {
+            if (uvValue >= 3 && uvValue < 8) {
                 document.getElementById("UV-index").style.backgroundColor = "orange"; 
             }
-            if (uvValue > 7) {
+            if (uvValue >= 7) {
                 document.getElementById("UV-index").style.backgroundColor = "red";
             }
             
@@ -95,11 +153,10 @@ function getWeatherForecasts() {
         });
     });
 
-  // //SET CITY TO LOCAL STORAGE
-  //What ever the value of text input is needs to be saved to local storage
-  //Key = city name & value = valueName
+   
 
-  // Create list of items added to search
+
+    
 
   //DATES FOR 5 DAY FORECAST
   $("#currentDay").text(moment().format("dddd, MMM Do YYYY"));
