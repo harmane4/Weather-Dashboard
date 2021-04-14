@@ -10,64 +10,49 @@ var uvIndex = document.getElementById("UV-index");
 var fiveDayForecast = document.getElementById("weekForecast");
 var currentWeatherIcon = document.getElementById("weatherIcon");
 var cityNameList = document.querySelector(".city-list");
+var cityNames;
 
 //EVENT LISTENERS
-
-button.addEventListener("click", addSearchResult);
-document.addEventListener("DOMContentLoaded", getSearchResultFromLocalStorage); //If everything loads, run function
+getSearchHistoryFromLocalStorage()
+renderSearchHistoryResults()
+button.addEventListener("click", getWeatherForecasts);
 
 //LOCAL STORAGE FUNCTIONS
+//local storage key = searchHistory 
+//local storage value = Response forecast data for city 
+//1. Set up a div for the search results 
+//2. Set up a list of the new search result 
+//3. Have the li appear as the searched city name 
+//4. Have the li/city name data saved to local storage 
+//5. When the city name is clicked on -- (event listener?) the data appears from local storage
 
-function addSearchResult(event) {
-  event.preventDefault();
-  var searchResultDiv = document.createElement("div");
-  searchResultDiv.classList.add("cityName");
+function saveSearchHistoryToLocalStorage(city) { //city is the parameter that represents the argument
+   cityNames.push(city)
+    localStorage.setItem('searchHistory', JSON.stringify(cityNames))
+} 
 
-  var newSearchResult = document.createElement("li");
-  newSearchResult.innerText = inputValue.value;
-  newSearchResult.classList.add("cityName-item");
-  searchResultDiv.appendChild(newSearchResult);
-  //Add to local storage
-  saveSearchResultToLocalStorage(inputValue.value);
-  //Append to list
-  cityNameList.appendChild(searchResultDiv);
+function getSearchHistoryFromLocalStorage() {
+    var citySearchHistory = JSON.parse(localStorage.getItem('searchHistory'))
+    if (!citySearchHistory) {// checking to see if anything exsists in local storage
+        cityNames = []
+    } else {
+        cityNames = citySearchHistory
+    }
 }
 
-function saveSearchResultToLocalStorage(searchResult) {
-  //Check if local storage already has items in it
-  let citySearchResult;
-  if (localStorage.getItem("search") === null) {
-    //if there is nothing in local storage
-    citySearchResult = []; //create empty array
-  } else {
-    citySearchResult = JSON.parse(localStorage.getItem("search")); //already have items in local storage, parse it back into an array
-  }
-  citySearchResult.push(searchResult); //
-  localStorage.setItem("search", JSON.stringify(citySearchResult)); //push array to local storage
+function renderSearchHistoryResults() {
+    for (let index = 0; index < cityNames.length; index++) {
+        const city = cityNames[index];
+        var listElement = document.createElement("li"); 
+        listElement.textContent = city;
+        cityNameList.appendChild(listElement)
+    }
+    
+
+
+
 }
 
-function getSearchResultFromLocalStorage() {
-  let citySearchResult;
-  if (localStorage.getItem("search") === null) {
-    //if there is nothing in local storage
-    citySearchResult = []; //create empty array
-  } else {
-    citySearchResult = JSON.parse(localStorage.getItem("search"));
-  }
-
-  citySearchResult.forEach(function (citySearch) {
-    var citySearchDiv = document.createElement("div");
-    citySearchDiv.classList.add("cityName");
-
-    var newCitySearch = document.createElement("li");
-    newCitySearch.innerText = citySearch;
-    newCitySearch.classList.add("cityName-item");
-    citySearchDiv.appendChild(newCitySearch);
-    cityNameList.appendChild(citySearchDiv);
-  });
-}
-
-button.addEventListener("click", getWeatherForecasts);
 
 //CURRENT DAY FORECAST
 
@@ -76,14 +61,14 @@ function getWeatherForecasts() {
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     inputValue.value +
     "&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric";
-  console.log(requestUrlForCurrentDayForecastApi);
 
   fetch(requestUrlForCurrentDayForecastApi)
     .then(function (response) {
-      return response.json();
-    })
+      return response.json();   //Converts response to usable object
+    })                          //Have another .then setting data to local storage? JSON.stringfy(data)
+                                //Return data & then render the data in a function? Copy whole function?
     .then(function (data) {
-      console.log(data);
+    saveSearchHistoryToLocalStorage(inputValue.value)
       var nameValue = data.name;
       var tempValue = data.main.temp;
       var humidValue = data.main.humidity;
@@ -95,12 +80,14 @@ function getWeatherForecasts() {
         `http://openweathermap.org/img/wn/${iconCode}@2x.png`
       );
 
+      //add .catch Window Alert and have text appear that says "invalid city name - please check spelling and try again"
+      
       cityName.innerHTML = nameValue;
       temperature.innerHTML = tempValue + " ˚C ";
       humidityValue.innerHTML = humidValue + "%";
       windSpeed.innerHTML = windValue + " MPH ";
 
-      //5 EXTENDED DAY FORECAST
+      // 5 EXTENDED DAY FORECAST
 
       var longitude = data.coord.lon;
       var latitude = data.coord.lat;
@@ -111,15 +98,14 @@ function getWeatherForecasts() {
         "&lon=" +
         longitude +
         "&exclude=minutely,hourly&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric";
-      console.log(requestForExtendedForecastData);
 
       fetch(requestForExtendedForecastData)
         .then(function (resp) {
-          return resp.json();
+          return resp.json(); 
         })
         .then(function (forecastData) {
           for (let i = 1; i <= 6; i++) {
-            let day = document.getElementById(`day${i}`);
+            let box = document.getElementById(`box${i}`); //template literal - i is the variable that get 1 on each loop. Add variable with concatenating
 
             var fiveDayTemp = document.createElement("p");
             var fiveDayHumidity = document.createElement("p");
@@ -135,7 +121,7 @@ function getWeatherForecasts() {
             );
             fiveDayWindSpeed.textContent =
               forecastData.daily[i].wind_speed + " MPH ";
-            day.append(
+            box.append( // This is not correct 
               fiveDayTemp,
               fiveDayHumidity,
               fiveDayWindSpeed,
