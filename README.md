@@ -7,15 +7,22 @@ Using the OpenWeather One Call and Current Weather Api, I was able to retrieve w
 
 When a city is searched for the current and future conditions for that city is displayed. 
 
-When the current conidtions for the city are disaplyed the city name, date, icon represneted the weather conditions, the temperature, the humidity, the wind speed and the UV index are all disaplyed. 
+When the current conditions for the city are displayed the city name, date, icon represented the weather conditions, the temperature, the humidity, the wind speed and the UV index are all displayed. 
 
 The UV index also has a color the indicates when the conditions are favorable (green), moderate (orange) and severe (red). 
 
-The 5 day foreast for the searched city is displayed with teh date, icon represented the weather conditions, the temperature, the wind speed, and the humidity. 
+The 5 day forcast for the searched city is displayed with teh date, icon represented the weather conditions, the temperature, the wind speed, and the humidity. 
+
+
+## Problems 
+After a city is searched for it only appears as a list item under Search History after the page has been refreshed. If a city is misspelt nothing loads on the page.
+
+When the city is click on in the search history the current weather conditions do not reappear. 
+
 
 ## Usage
  
-![Screen-shot-of-final-product](assets/images/WorkSchedulerScreenShot.png)
+![Screen-shot-of-final-product](assets/Image/WeatherDashboardScreenShot.png)
 
 [Link to deployed application](https://harmane4.github.io/Weather-Dashboard/)
 
