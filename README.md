@@ -15,9 +15,14 @@ The 5 day forcast for the searched city is displayed with teh date, icon represe
 
 
 ## Problems 
-After a city is searched for it only appears as a list item under Search History after the page has been refreshed. If a city is misspelt nothing loads on the page.
+After a city is searched for it only appears as a list item under Search History after the page has been refreshed. 
+
+After a city is searched for it remains in the search bar.
+
+If a city is misspelt nothing loads on the page.
 
 When the city is click on in the search history the current weather conditions do not reappear. 
+
 
 
 ## Usage
@@ -35,6 +40,8 @@ Websites used to create application:
 [Fetching icons from OpenWeather API](https://dev.to/mtee/day-63-fetching-icons-from-open-weather-23lh)
 
 [Beginner Vanilla Javascript Project Tutorial](https://www.youtube.com/watch?v=Ttf3CEsEwMQ)
+
+[How To Use Local Storage with JavaScript](https://www.taniarascia.com/how-to-use-local-storage-with-javascript/)
 
 ## License 
 [MIT](https://choosealicense.com/licenses/mit/)
