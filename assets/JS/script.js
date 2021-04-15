@@ -49,7 +49,7 @@ function renderSearchHistoryResults() {
 
 function getWeatherForecasts() {
   var requestUrlForCurrentDayForecastApi =
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    "http://api.openweathermap.org/data/2.5/weather?q=" +
     inputValue.value +
     "&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric";
 
@@ -84,7 +84,7 @@ function getWeatherForecasts() {
       var latitude = data.coord.lat;
 
       var requestForExtendedForecastData =
-        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+        "http://api.openweathermap.org/data/2.5/onecall?lat=" +
         latitude +
         "&lon=" +
         longitude +
