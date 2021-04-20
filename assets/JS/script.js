@@ -49,7 +49,7 @@ function renderSearchHistoryResults() {
 
 function getWeatherForecasts() {
   var requestUrlForCurrentDayForecastApi =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     inputValue.value +
     "&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric";
 
@@ -68,7 +68,7 @@ function getWeatherForecasts() {
       const img = document.querySelector("#weatherIcon");
       img.setAttribute(
         "src",
-        `http://openweathermap.org/img/wn/${iconCode}@2x.png`
+        `https://openweathermap.org/img/wn/${iconCode}@2x.png`
       );
 
       //TO DO add .catch Window Alert and have text appear that says "invalid city name - please check spelling and try again"
@@ -84,7 +84,7 @@ function getWeatherForecasts() {
       var latitude = data.coord.lat;
 
       var requestForExtendedForecastData =
-        "http://api.openweathermap.org/data/2.5/onecall?lat=" +
+        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
         latitude +
         "&lon=" +
         longitude +
@@ -108,7 +108,7 @@ function getWeatherForecasts() {
             fiveDayHumidity.textContent = forecastData.daily[i].humidity + "˚%";
             fiveDayWeatherIcon.setAttribute(
               "src",
-              `http://openweathermap.org/img/wn/${iconImage}@2x.png`
+              `https://openweathermap.org/img/wn/${iconImage}@2x.png`
             );
             fiveDayWindSpeed.textContent =
               forecastData.daily[i].wind_speed + " MPH ";
