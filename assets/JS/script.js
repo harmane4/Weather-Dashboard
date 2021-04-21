@@ -43,10 +43,17 @@ function renderSearchHistoryResults() {
   inputValue.value = "";
   for (let index = 0; index < cityNames.length; index++) {
     const city = cityNames[index];
+    var listElementButton = document.createElement("button");
     var listElement = document.createElement("li");
-    listElement.textContent = city;
-    cityNameList.appendChild(listElement);
+    listElementButton.textContent = city;
+    cityNameList.appendChild(listElement); //append li to ul 
+    listElement.appendChild(listElementButton); //append button to li
   }
+  
+  //.target to determine which button clicked on
+  //get button city (button text content)
+  //feed into function
+
   listElement.addEventListener("click", getWeatherForecasts)
 }
 
