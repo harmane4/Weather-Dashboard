@@ -37,6 +37,8 @@ function getSearchHistoryFromLocalStorage() {
 }
 
 function renderSearchHistoryResults() {
+  cityNameList.innerHTML = "";
+  inputValue.value = "";
   for (let index = 0; index < cityNames.length; index++) {
     const city = cityNames[index];
     var listElement = document.createElement("li");
@@ -135,7 +137,10 @@ function getWeatherForecasts() {
               document.getElementById("UV-index").style.backgroundColor = "red";
             }
           }
+       
         });
+        getSearchHistoryFromLocalStorage();
+        renderSearchHistoryResults();
     });
 
   //DATES FOR 5 DAY FORECAST
