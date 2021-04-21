@@ -36,6 +36,8 @@ function getSearchHistoryFromLocalStorage() {
   }
 }
 
+
+
 function renderSearchHistoryResults() {
   cityNameList.innerHTML = "";
   inputValue.value = "";
@@ -45,6 +47,7 @@ function renderSearchHistoryResults() {
     listElement.textContent = city;
     cityNameList.appendChild(listElement);
   }
+  listElement.addEventListener("click", getWeatherForecasts)
 }
 
 //CURRENT DAY FORECAST
@@ -146,13 +149,22 @@ function getWeatherForecasts() {
   //DATES FOR 5 DAY FORECAST
   $("#currentDay").text(moment().format("dddd, MMM Do YYYY"));
 
-  $("#day1").text(moment().add(1, "days").format("dddd, MMM Do"));
+  // $("#box1").text(moment().add(1, "days").format("dddd, MMM Do"));
 
-  $("#day2").text(moment().add(2, "days").format("dddd, MMM Do"));
+  // $("#box2").text(moment().add(2, "days").format("dddd, MMM Do"));
 
-  $("#day3").text(moment().add(3, "days").format("dddd, MMM Do"));
+  // $("#box3").text(moment().add(3, "days").format("dddd, MMM Do"));
 
-  $("#day4").text(moment().add(4, "days").format("dddd, MMM Do"));
+  // $("#box4").text(moment().add(4, "days").format("dddd, MMM Do"));
 
-  $("#day5").text(moment().add(5, "days").format("dddd, MMM Do"));
+  // $("#box5").text(moment().add(5, "days").format("dddd, MMM Do"));
+
+
+  for (let index = 1; index < 6; index++) {
+    console.log(index)
+    // const element = array[index];
+    // $(`#box${index}`).text(moment().add(index, "days").format("dddd, MMM Do"));
+    $("#box" + index).text(moment().add(index, "days").format("dddd, MMM Do"));
+    
+  }
 }
