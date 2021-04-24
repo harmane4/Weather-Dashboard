@@ -36,8 +36,6 @@ function getSearchHistoryFromLocalStorage() {
   }
 }
 
-
-
 function renderSearchHistoryResults() {
   cityNameList.innerHTML = "";
   inputValue.value = "";
@@ -49,7 +47,7 @@ function renderSearchHistoryResults() {
     cityNameList.appendChild(listElement); //append li to ul 
     listElement.appendChild(listElementButton); //append button to li
   }
-  
+
   //.target to determine which button clicked on
   //get button city (button text content)
   //feed into function
