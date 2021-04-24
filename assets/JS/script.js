@@ -52,7 +52,7 @@ function renderSearchHistoryResults() {
   //get button city (button text content)
   //feed into function
 
-  listElement.addEventListener("click", getWeatherForecasts)
+  // listElement.addEventListener("click", getWeatherForecasts)
 }
 
 //CURRENT DAY FORECAST
