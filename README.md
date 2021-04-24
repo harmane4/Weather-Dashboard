@@ -11,18 +11,20 @@ When the current conditions for the city are displayed the city name, date, icon
 
 The UV index also has a color the indicates when the conditions are favorable (green), moderate (orange) and severe (red). 
 
-The 5 day forcast for the searched city is displayed with teh date, icon represented the weather conditions, the temperature, the wind speed, and the humidity. 
+The 5 day forcast for the searched city is displayed with the date, icon represented the weather conditions, the temperature, the wind speed, and the humidity.
+
+After a city is searched for it appears under the Search History and remains there after the page has been refreshed.
 
 
 ## Problems 
-After a city is searched for it only appears as a list item under Search History after the page has been refreshed. 
 
-After a city is searched for it remains in the search bar.
-
-If a city is misspelt nothing loads on the page.
+If a city is spelt incorrectly nothing loads on the page.
 
 When the city is click on in the search history the current weather conditions do not reappear. 
 
+## Technologies Used
+
+Open Weater API
 
 
 ## Usage
