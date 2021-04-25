@@ -10,16 +10,16 @@ var uvIndex = document.getElementById("UV-index");
 var fiveDayForecast = document.getElementById("weekForecast");
 var currentWeatherIcon = document.getElementById("weatherIcon");
 var cityNameList = document.querySelector(".city-list");
+// var box = document.querySelector(".box")
 var cityNames;
+
 
 //EVENT LISTENERS
 getSearchHistoryFromLocalStorage();
 renderSearchHistoryResults();
-button.addEventListener("click", getWeatherForecasts);
+button.addEventListener("click", clickInput);
 
 //LOCAL STORAGE FUNCTIONS
-// TO DO 5. When the city name is clicked on -- (event listener?) the data appears from local storage
-
 function saveSearchHistoryToLocalStorage(city) {
   //city is the parameter that represents the argument
   cityNames.push(city);
@@ -41,26 +41,47 @@ function renderSearchHistoryResults() {
   inputValue.value = "";
   for (let index = 0; index < cityNames.length; index++) {
     const city = cityNames[index];
+    console.log(cityNames.length)
+    if (cityNames.length === 10) {
+      cityNames.shift()
+    }
     var listElementButton = document.createElement("button");
     var listElement = document.createElement("li");
+    listElementButton.setAttribute("class" , "historyButton")
     listElementButton.textContent = city;
     cityNameList.appendChild(listElement); //append li to ul 
     listElement.appendChild(listElementButton); //append button to li
   }
+  //if statement to cap number of search history results 
+  // use method shift - removes first item in array 
 
-  //.target to determine which button clicked on
-  //get button city (button text content)
-  //feed into function
+}
 
-  // listElement.addEventListener("click", getWeatherForecasts)
+
+var historyButton = document.querySelector("#historyButton")
+
+historyButton.addEventListener("click", historyClick)
+
+function historyClick(eventObject) {
+searchResult = eventObject.target.innerText
+getWeatherForecasts(searchResult)
+
+}
+
+function clickInput() {
+  if (inputValue.value != null){
+   userSearchInput = inputValue.value;
+  }
+  getWeatherForecasts(userSearchInput)
 }
 
 //CURRENT DAY FORECAST
 
-function getWeatherForecasts() {
+function getWeatherForecasts(searchResult) {
+ 
   var requestUrlForCurrentDayForecastApi =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
-    inputValue.value +
+    searchResult +
     "&appid=bee9bea7f570ee0519f49aaa8cf31eff&units=metric";
 
   fetch(requestUrlForCurrentDayForecastApi)
@@ -69,7 +90,7 @@ function getWeatherForecasts() {
     }) //Have another .then setting data to local storage? JSON.stringfy(data)
     //Return data & then render the data in a function? Copy whole function?
     .then(function (data) {
-      saveSearchHistoryToLocalStorage(inputValue.value);
+      saveSearchHistoryToLocalStorage(searchResult);
       var nameValue = data.name;
       var tempValue = data.main.temp;
       var humidValue = data.main.humidity;
@@ -105,8 +126,8 @@ function getWeatherForecasts() {
           return resp.json();
         })
         .then(function (forecastData) {
-          for (let i = 1; i <= 6; i++) {
-            let box = document.getElementById(`box${i}`); //template literal - i is the variable that get 1 on each loop. Add variable with concatenating
+          for (let i = 1; i <= 5; i++) {
+            var box = document.getElementById(`box${i}`); //template literal - i is the variable that get 1 on each loop. Add variable with concatenating
 
             var fiveDayTemp = document.createElement("p");
             var fiveDayHumidity = document.createElement("p");
@@ -155,7 +176,6 @@ function getWeatherForecasts() {
   $("#currentDay").text(moment().format("dddd, MMM Do YYYY"));
 
   for (let index = 1; index < 6; index++) {
-    console.log(index)
     // $(`#box${index}`).text(moment().add(index, "days").format("dddd, MMM Do"));
     $("#box" + index).text(moment().add(index, "days").format("dddd, MMM Do"));
     
