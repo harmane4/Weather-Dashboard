@@ -37,14 +37,14 @@ h2 {
 .date {
     background-color: #098a8a;
     color: white;
-    height: 230px;
+    height: 270px;
     width: 100px;
     display: inline-block;
     text-align: center;
 }
 
 .UV {
-    width: 4%;
+    width: 4em;
 } 
 
 .city-list {

@@ -84,9 +84,9 @@ function getWeatherForecasts() {
       //TO DO add .catch Window Alert and have text appear that says "invalid city name - please check spelling and try again"
 
       cityName.innerHTML = nameValue;
-      temperature.innerHTML = tempValue + " ˚C ";
-      humidityValue.innerHTML = humidValue + "%";
-      windSpeed.innerHTML = windValue + " MPH ";
+      temperature.innerHTML = " Temperature = " + tempValue + " ˚C ";
+      humidityValue.innerHTML = " Humidity = " +  humidValue + "%";
+      windSpeed.innerHTML = " Wind Speed = " + windValue + " MPH ";
 
       // 5 EXTENDED DAY FORECAST
 
@@ -114,14 +114,14 @@ function getWeatherForecasts() {
             var fiveDayWeatherIcon = document.createElement("img");
             var iconImage = forecastData.daily[i].weather[0].icon;
             var uvValue = forecastData.current.uvi;
-            fiveDayTemp.textContent = forecastData.daily[i].temp.day + " ˚C ";
-            fiveDayHumidity.textContent = forecastData.daily[i].humidity + "˚%";
+            fiveDayTemp.textContent = " Temperature " + forecastData.daily[i].temp.day + " ˚C ";
+            fiveDayHumidity.textContent = " Humidity " + forecastData.daily[i].humidity + "˚%";
             fiveDayWeatherIcon.setAttribute(
               "src",
               `https://openweathermap.org/img/wn/${iconImage}@2x.png`
             );
             fiveDayWindSpeed.textContent =
-              forecastData.daily[i].wind_speed + " MPH ";
+            " Wind Speed " +forecastData.daily[i].wind_speed + " MPH ";
             box.append(
               // This is not correct
               fiveDayTemp,
@@ -130,7 +130,7 @@ function getWeatherForecasts() {
               fiveDayWeatherIcon
             );
 
-            uvIndex.innerHTML = uvValue;
+            uvIndex.innerHTML = " UV Index = " + uvValue;
 
             //BACKGROUND COLOUR OF UV INDEX WILL CHANGE DEPENDING ON CONDITIONS
             if (uvValue < 3) {
@@ -154,20 +154,8 @@ function getWeatherForecasts() {
   //DATES FOR 5 DAY FORECAST
   $("#currentDay").text(moment().format("dddd, MMM Do YYYY"));
 
-  // $("#box1").text(moment().add(1, "days").format("dddd, MMM Do"));
-
-  // $("#box2").text(moment().add(2, "days").format("dddd, MMM Do"));
-
-  // $("#box3").text(moment().add(3, "days").format("dddd, MMM Do"));
-
-  // $("#box4").text(moment().add(4, "days").format("dddd, MMM Do"));
-
-  // $("#box5").text(moment().add(5, "days").format("dddd, MMM Do"));
-
-
   for (let index = 1; index < 6; index++) {
     console.log(index)
-    // const element = array[index];
     // $(`#box${index}`).text(moment().add(index, "days").format("dddd, MMM Do"));
     $("#box" + index).text(moment().add(index, "days").format("dddd, MMM Do"));
     
