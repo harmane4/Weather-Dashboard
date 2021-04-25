@@ -22,7 +22,9 @@ button.addEventListener("click", clickInput);
 //LOCAL STORAGE FUNCTIONS
 function saveSearchHistoryToLocalStorage(city) {
   //city is the parameter that represents the argument
-  cityNames.push(city);
+  if (!cityNames.includes(city)) {
+    cityNames.push(city);
+  }
   localStorage.setItem("searchHistory", JSON.stringify(cityNames));
 }
 
@@ -41,10 +43,12 @@ function renderSearchHistoryResults() {
   inputValue.value = "";
   for (let index = 0; index < cityNames.length; index++) {
     const city = cityNames[index];
-    console.log(cityNames.length)
-    if (cityNames.length === 10) {
+    // if (cityNames.includes(city)) {
+    //   return
+    // }
+    if (cityNames.length === 10  ) {
       cityNames.shift()
-    }
+    } 
     var listElementButton = document.createElement("button");
     var listElement = document.createElement("li");
     listElementButton.setAttribute("class" , "historyButton")
@@ -52,11 +56,9 @@ function renderSearchHistoryResults() {
     cityNameList.appendChild(listElement); //append li to ul 
     listElement.appendChild(listElementButton); //append button to li
   }
-  //if statement to cap number of search history results 
-  // use method shift - removes first item in array 
+
 
 }
-
 
 var historyButton = document.querySelector("#historyButton")
 
