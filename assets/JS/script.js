@@ -10,14 +10,14 @@ var uvIndex = document.getElementById("UV-index");
 var fiveDayForecast = document.getElementById("weekForecast");
 var currentWeatherIcon = document.getElementById("weatherIcon");
 var cityNameList = document.querySelector(".city-list");
-// var box = document.querySelector(".box")
+var historyButton = document.querySelector("#historyButton")
 var cityNames;
-
 
 //EVENT LISTENERS
 getSearchHistoryFromLocalStorage();
 renderSearchHistoryResults();
 button.addEventListener("click", clickInput);
+historyButton.addEventListener("click", historyClick)
 
 //LOCAL STORAGE FUNCTIONS
 function saveSearchHistoryToLocalStorage(city) {
@@ -43,9 +43,6 @@ function renderSearchHistoryResults() {
   inputValue.value = "";
   for (let index = 0; index < cityNames.length; index++) {
     const city = cityNames[index];
-    // if (cityNames.includes(city)) {
-    //   return
-    // }
     if (cityNames.length === 10  ) {
       cityNames.shift()
     } 
@@ -56,18 +53,11 @@ function renderSearchHistoryResults() {
     cityNameList.appendChild(listElement); //append li to ul 
     listElement.appendChild(listElementButton); //append button to li
   }
-
-
 }
-
-var historyButton = document.querySelector("#historyButton")
-
-historyButton.addEventListener("click", historyClick)
 
 function historyClick(eventObject) {
 searchResult = eventObject.target.innerText
 getWeatherForecasts(searchResult)
-
 }
 
 function clickInput() {

@@ -20,12 +20,13 @@ After a city is searched for it appears under the Search History and remains the
 
 If a city is spelt incorrectly nothing loads on the page.
 
-When the city is click on in the search history the current weather conditions do not reappear. 
 
 ## Technologies Used
 
-Open Weater API
-
+HTML 
+CSS
+JavaScript
+Open Weather API
 
 ## Usage
  
@@ -33,17 +34,6 @@ Open Weater API
 
 [Link to deployed application](https://harmane4.github.io/Weather-Dashboard/)
 
-## Credits
-
-Websites used to create application: 
-
-[JavaScript Weather App Tutorial using Openweathermap API for beginners | Javascript tutorial](https://www.youtube.com/watch?v=GXrDEA3SIOQ&t=4s)
-
-[Fetching icons from OpenWeather API](https://dev.to/mtee/day-63-fetching-icons-from-open-weather-23lh)
-
-[Beginner Vanilla Javascript Project Tutorial](https://www.youtube.com/watch?v=Ttf3CEsEwMQ)
-
-[How To Use Local Storage with JavaScript](https://www.taniarascia.com/how-to-use-local-storage-with-javascript/)
 
 ## License 
 [MIT](https://choosealicense.com/licenses/mit/)
