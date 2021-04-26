@@ -23,10 +23,10 @@ If a city is spelt incorrectly nothing loads on the page.
 
 ## Technologies Used
 
-HTML 
-CSS
-JavaScript
-Open Weather API
+- HTML 
+- CSS
+- JavaScript
+- Open Weather API
 
 ## Usage
  
