@@ -43,7 +43,7 @@ function renderSearchHistoryResults() {
   inputValue.value = "";
   for (let index = 0; index < cityNames.length; index++) {
     const city = cityNames[index];
-    if (cityNames.length === 10  ) {
+    if (cityNames.length === 6  ) {
       cityNames.shift()
     } 
     var listElementButton = document.createElement("button");
@@ -52,6 +52,8 @@ function renderSearchHistoryResults() {
     listElementButton.textContent = city;
     cityNameList.appendChild(listElement); //append li to ul 
     listElement.appendChild(listElementButton); //append button to li
+
+    listElementButton.classList.add("listButton")
   }
 }
 
@@ -159,10 +161,13 @@ function getWeatherForecasts(searchResult) {
             }
           }
        
-        });
+        })
+        // .catch(window.alert("Please try again")); 
+        // If 404 message is received have window alert 
         getSearchHistoryFromLocalStorage();
         renderSearchHistoryResults();
-    });
+    })
+    // .catch(window.alert("Please try again")); 
 
   //DATES FOR 5 DAY FORECAST
   $("#currentDay").text(moment().format("dddd, MMM Do YYYY"));

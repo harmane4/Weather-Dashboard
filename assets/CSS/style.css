@@ -20,8 +20,8 @@
 }
 
 header {
-    background-color: #0cbaba;
-    background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
+    background-color: #0077B6;
+    background-image: #0077B6;
     
 } 
 
@@ -35,7 +35,7 @@ h2 {
 }
 
 .date {
-    background-color: #098a8a;
+    background-color: #00B4D8;
     color: white;
     height: 270px;
     width: 100px;
@@ -60,14 +60,27 @@ h2 {
     font-family:'Roboto',sans-serif;
     font-weight:300;
     color:#FFFFFF;
-    background-color:#380036;
+    background-color:#03045E;
     text-align:center;
     transition: all 0.2s;
 } 
 
+.listButton {
+    background-color: #0077B6;
+    color: white;
+    margin: 10px;
+    width: 71em;
+    height: 5em;
+}
+
 .input {
     border-color: black;
     padding-left: 2em;
+}
+
+.inputValue {
+    width: 54em;
+    height: 2.5em;
 }
 
 h3 {

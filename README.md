@@ -11,7 +11,7 @@ When the current conditions for the city are displayed the city name, date, icon
 
 The UV index also has a color the indicates when the conditions are favorable (green), moderate (orange) and severe (red). 
 
-The 5 day forcast for the searched city is displayed with the date, icon represented the weather conditions, the temperature, the wind speed, and the humidity.
+The 5 day forecast for the searched city is displayed with the date, icon represented the weather conditions, the temperature, the wind speed, and the humidity.
 
 After a city is searched for it appears under the Search History and remains there after the page has been refreshed.
 
