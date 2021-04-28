@@ -1,15 +1,24 @@
 * {
-    font-family: sans-serif;
+    text-align: center;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: large;
+}
+
+p {
+    font-size: 140%;
 }
 
 .date {
-    height: 50px;
-    width: 50px;
     border-style: solid;
     border-width: 2px;
     padding: 2em;
-    display: inline-block;
     margin: 1em;
+    background-color: #00B4D8;
+    color: white;
+    height: 270px;
+    width: 100px;
+    flex-direction: column;
+    flex: 1;
 }
 
 .currentDayContainer {
@@ -28,24 +37,13 @@ header {
 h1 {
     color: white;
     padding-left: 1em;
+    font-size: xx-large;
 }
 
 h2 {
     padding-left: 1.25em;
+    font-size: x-large;
 }
-
-.date {
-    background-color: #00B4D8;
-    color: white;
-    height: 270px;
-    width: 100px;
-    display: inline-block;
-    text-align: center;
-}
-
-.UV {
-    width: 4em;
-} 
 
 .city-list {
     list-style: none;
@@ -86,9 +84,17 @@ h2 {
 h3 {
     padding-left: 2em;
     margin-top: 2em;
-    font-size: 1em;
+    font-size: 140%;
 }
 
 span {
     font-size: 1em;
+}
+
+#weekForecast {
+    display: flex;
+}
+
+#text {
+    font-size: 140%;
 }

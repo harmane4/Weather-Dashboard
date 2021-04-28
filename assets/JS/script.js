@@ -164,6 +164,9 @@ function getWeatherForecasts(searchResult) {
         })
         // .catch(window.alert("Please try again")); 
         // If 404 message is received have window alert 
+        // .catch if (err) {
+        // return window.alert()
+        //}
         getSearchHistoryFromLocalStorage();
         renderSearchHistoryResults();
     })

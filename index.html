@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="assets/CSS/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Open+Sans+Condensed:wght@300&family=Rubik&display=swap" rel="stylesheet">
     <script src="assets/JS/script.js" defer></script>
     <title>Weather Dashboard</title>
   </head>
@@ -16,14 +18,14 @@
            <h3 class="temperature"></h3>
             <h3 class="windSpeed"></h3>
             <h3 class=humidityValue></h3>
-           <h3 class="UV" id="UV-index"></h3>
+           <h3 class="UV" id="UV-index">UV Index</h3>
             <span><img id="weatherIcon" src="" alt=""></span>
         </div>
 
         <!---5 Day forecast--->
       <div>
         <h2>5-Day Forecast:</h2>
-        <div id="weekForecast">
+        <div id="weekForecast" class="fiveDayForecast">
           <div id="box1" class="date"></div>
           <div id="box2" class="date"></div>
           <div id="box3" class="date"></div>
